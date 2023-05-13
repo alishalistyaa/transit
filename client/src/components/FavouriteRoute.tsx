@@ -23,7 +23,7 @@ export default function FavouriteRoute({
         <Image src={FavRouteIcon} width={32} height={32} alt="" />
       </div>
 
-      <div className="absolute pl-7 left-[60px] top-2 rounded-[20px] bg-GREEN-400 flex items-center h-[33px] w-[181px]">
+      <div className="absolute pl-6 left-[60px] top-2 rounded-[20px] bg-GREEN-400 flex items-center h-[33px] w-[166px]">
         <h5 className="font-poppinsBold text-black">{route}</h5>
       </div>
 

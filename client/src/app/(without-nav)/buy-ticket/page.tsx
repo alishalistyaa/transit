@@ -90,12 +90,12 @@ export default function BuyTicketPage(): JSX.Element {
       <ul className="mt-5">
         {stops.map((stop, index) => {
           const title =
-            stop.title.length > 24
-              ? stop.title.slice(0, 24) + "..."
+            stop.title.length > 20
+              ? stop.title.slice(0, 20) + "..."
               : stop.title;
           const address =
-            stop.address.length > 42
-              ? stop.address.slice(0, 42) + "..."
+            stop.address.length > 38
+              ? stop.address.slice(0, 38) + "..."
               : stop.address;
 
           return (

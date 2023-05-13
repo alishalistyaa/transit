@@ -63,13 +63,13 @@ export default function DashboardPage(): JSX.Element {
 
   return (
     <main>
-      <div className="w-full flex items-center justify-between px-7 pt-12">
+      <div className="w-full flex items-center justify-between px-7 pt-10">
         <Image src={TransitLogo} width={59} height={66} alt="Transit Logo" />
 
         <CurrentLocation address={address} />
       </div>
 
-      <h1 className="font-jeko text-xl tracking-[0.02] mt-11 mx-10 text-BROWN-700">
+      <h1 className="font-jeko text-xl tracking-[0.02] mt-5 mx-10 text-BROWN-700">
         Hi, <span className="text-GREEN-500">{username}</span> <br /> Mau kemana
         hari ini?
       </h1>
@@ -81,7 +81,7 @@ export default function DashboardPage(): JSX.Element {
         />
       </div>
 
-      <div className="relative w-[337px] h-[174px] bg-BLUE-700 rounded-3xl mt-4 drop-shadow-[4px_4px_4px_rgba(0,0,0,0.25)] mx-auto px-4 pt-10 overflow-hidden">
+      <div className="relative w-[86.4vw] h-[174px] bg-BLUE-700 rounded-3xl mt-4 drop-shadow-[4px_4px_4px_rgba(0,0,0,0.25)] mx-auto px-4 pt-10 overflow-hidden">
         <div className="absolute w-[337px] h-[154px] top-4 left-0 -z-10">
           <Image src={CardBackground} fill={true} alt="" />
         </div>
@@ -103,7 +103,7 @@ export default function DashboardPage(): JSX.Element {
       </h2>
 
       {/* TODO: Set this toggle button to change opacity */}
-      <div className="flex justify-between items-center px-8 w-full mt-3.5">
+      <div className="flex justify-between items-center mx-auto w-[320px] mt-3.5">
         <button onClick={() => setBisChecked(!isBisChecked)}>
           <Image
             src={isBisChecked ? BisChecked : BisUnchecked}

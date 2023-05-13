@@ -56,7 +56,7 @@ export default function RootLayout({
           poppinsBold.variable
         )}
       >
-        <div className="max-w-[420px] bg-white mx-auto min-h-[100vh]">
+        <div className="max-w-[420px] bg-white mx-auto min-h-[100vh] overflow-hidden">
           {children}
         </div>
       </body>
