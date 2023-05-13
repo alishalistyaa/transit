@@ -5,9 +5,10 @@ import Image from "next/image";
 
 import CurrentLocation from "@/components/CurrentLocation";
 import DestinationInput from "@/components/DestinationInput";
+import FavouriteRoute from "@/components/FavouriteRoute";
+import NearestStop from "@/components/NearestStop";
 
 import ArrowBack from "@/assets/icons/arrow-back.svg";
-import LocationIcon from "@/assets/icons/location-icon.svg";
 
 type stop = {
   distance: number;
@@ -15,10 +16,20 @@ type stop = {
   address: string;
 };
 
+type favRoute = {
+  route: string;
+  title: string;
+  distance: number;
+  date: Date;
+};
+
 export default function BuyTicketPage(): JSX.Element {
   const [address, setAddress] = useState("");
   const [destination, setDestination] = useState("");
   const [stops, setStops] = useState<stop[]>([]);
+
+  const [firstFavRoute, setFirstFavRoute] = useState<favRoute>();
+  const [secondFavRoute, setSecondFavRoute] = useState<favRoute>();
 
   useEffect(() => {
     setAddress("Jl. Bojongsoang No.3");
@@ -48,6 +59,18 @@ export default function BuyTicketPage(): JSX.Element {
           "Jl. Dipati Ukur No.80, Dago, Coblong, Kota Bandung, Jawa Barat",
       },
     ]);
+    setFirstFavRoute({
+      route: "Kelapa - Dago",
+      title: "Ke rumah",
+      distance: 2,
+      date: new Date("2023-02-21"),
+    });
+    setSecondFavRoute({
+      route: "Dago - Caringin",
+      title: "Ke perpustakaan",
+      distance: 4,
+      date: new Date("2023-02-21"),
+    });
   }, []);
 
   return (
@@ -76,27 +99,40 @@ export default function BuyTicketPage(): JSX.Element {
               : stop.address;
 
           return (
-            <div
-              key={index}
-              className="bg-GRAY-400 w-[80vw] rounded-[10px] first:mt-0 mt-3 flex pl-5 pr-4 py-3 mx-auto"
-            >
-              <div className="flex flex-col items-center pt-1.5 w-10 h-10 rounded-md bg-GRAY-600">
-                <Image src={LocationIcon} width={13} height={13} alt="" />
-                <p className="font-poppinsLight text-white text-[10px] mt-1">
-                  {stop.distance + " KM"}
-                </p>
-              </div>
-
-              <div className="ml-4">
-                <h3 className="text-BROWN-800 font-jeko">{title}</h3>
-                <p className="mt-1 font-poppinsLight text-[10px] text-BROWN-800">
-                  {address}
-                </p>
-              </div>
+            <div key={index} className="first:mt-0 mt-3">
+              <NearestStop
+                distance={stop.distance}
+                title={title}
+                address={address}
+              />
             </div>
           );
         })}
       </ul>
+
+      <div className="w-full h-[360px] bg-BLUE-700 pt-12 rounded-t-[18px] absolute bottom-0">
+        <h4 className="text-white font-poppinsBold w-[79.2vw] mx-auto">
+          Rute Favorit
+        </h4>
+
+        <div className="mt-7">
+          <FavouriteRoute
+            route={firstFavRoute?.route}
+            title={firstFavRoute?.title}
+            distance={firstFavRoute?.distance}
+            date={firstFavRoute?.date}
+          />
+        </div>
+
+        <div className="mt-6">
+          <FavouriteRoute
+            route={secondFavRoute?.route}
+            title={secondFavRoute?.title}
+            distance={secondFavRoute?.distance}
+            date={secondFavRoute?.date}
+          />
+        </div>
+      </div>
     </main>
   );
 }
