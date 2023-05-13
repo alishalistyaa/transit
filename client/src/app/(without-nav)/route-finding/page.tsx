@@ -44,7 +44,7 @@ export default function RouteFindingPage(): JSX.Element {
   }, []);
 
   return (
-    <div className="relative w-full h-[100vh]">
+    <main className="relative w-full h-[100vh]">
       <div className="absolute top-0 left-0 w-full h-[100vh]">
         <LoadScript googleMapsApiKey={MAPS_API_KEY}>
           <GoogleMap
@@ -126,6 +126,6 @@ export default function RouteFindingPage(): JSX.Element {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

@@ -27,9 +27,12 @@ module.exports = {
         "GREEN-700": "#54A382",
         "BLUE-500": "#006DB0",
         "BLUE-700": "#00386C",
+        "BROWN-500": "#575757",
+        "BROWN-600": "#474646",
         "BROWN-700": "#58585B",
         "BROWN-800": "#393939",
         "YELLOW-500": "#FFB75A",
+        "RED-500": "#D75861",
       },
       fontFamily: {
         jeko: ["var(--font-jeko)"],
