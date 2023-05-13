@@ -5,5 +5,7 @@ import (
 )
 
 func RouteAuth(router *gin.Engine) {
-	router.GET("/auth/tester", AuthTester)
+	authGroup := router.Group("/auth")
+
+	authGroup.GET("/tester", AuthTester)
 }
