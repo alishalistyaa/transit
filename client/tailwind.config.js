@@ -15,11 +15,14 @@ module.exports = {
       colors: {
         "GRAY-100": "#F8F8FF",
         "GRAY-300": "#F5F5F5",
+        "GRAY-400": "#F0F0F0",
         "GRAY-500": "#898989",
+        "GRAY-600": "#D9D9D9",
         "GREEN-500": "#459B8E",
         "GREEN-600": "#54A382",
         "BLUE-700": "#00386C",
         "BROWN-700": "#58585B",
+        "BROWN-800": "#393939",
       },
       fontFamily: {
         jeko: ["var(--font-jeko)"],

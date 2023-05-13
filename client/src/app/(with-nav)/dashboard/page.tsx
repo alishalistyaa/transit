@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
+import CurrentLocation from "@/components/CurrentLocation";
+import DestinationInput from "@/components/DestinationInput";
+
 import SearchIcon from "@/assets/icons/search-icon.svg";
 import CardBackground from "@/assets/images/dashboard-card.png";
 import ArrowRight from "@/assets/icons/arrow-right.svg";
@@ -63,18 +66,7 @@ export default function DashboardPage(): JSX.Element {
       <div className="w-full flex items-center justify-between px-7 pt-12">
         <Image src={TransitLogo} width={59} height={66} alt="Transit Logo" />
 
-        <div className="bg-GRAY-100 w-[195px] h-6 rounded-[20px] pl-3 flex items-center">
-          <p className=" font-allrounderRegular font-medium text-BROWN-700 text-sm mr-2.5">
-            {address}
-          </p>
-          <Image
-            style={{ opacity: 0.12 }}
-            src={ArrowDown}
-            width={12}
-            height={12}
-            alt=""
-          />
-        </div>
+        <CurrentLocation address={address} />
       </div>
 
       <h1 className="font-jeko text-xl tracking-[0.02] mt-11 mx-10 text-BROWN-700">
@@ -82,14 +74,10 @@ export default function DashboardPage(): JSX.Element {
         hari ini?
       </h1>
 
-      <div className="flex bg-GRAY-300 py-2 px-3 w-[312px] ml-10 mt-4 rounded-[20px] border border-black">
-        <Image src={SearchIcon} width={12} height={12} alt="" />
-        <input
-          className="text-[10px] bg-GRAY-300 ml-2 outline-none font-poppinsLight"
-          type="text"
+      <div className="mt-4">
+        <DestinationInput
           onChange={(e) => setDestination(e.target.value)}
           value={destination}
-          placeholder="Institut Teknologi Bandung"
         />
       </div>
 
@@ -114,6 +102,7 @@ export default function DashboardPage(): JSX.Element {
         Moda Transportasi
       </h2>
 
+      {/* TODO: Set this toggle button to change opacity */}
       <div className="flex justify-between items-center px-8 w-full mt-3.5">
         <button onClick={() => setBisChecked(!isBisChecked)}>
           <Image
