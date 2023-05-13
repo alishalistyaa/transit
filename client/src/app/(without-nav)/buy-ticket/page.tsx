@@ -74,7 +74,7 @@ export default function BuyTicketPage(): JSX.Element {
   }, []);
 
   return (
-    <main>
+    <main className="relative">
       <div className="flex items-center pt-8 justify-between w-[80.7vw] mx-auto">
         <Image src={ArrowBack} width={25} height={10} alt="" />
         <CurrentLocation address={address} />
@@ -110,7 +110,7 @@ export default function BuyTicketPage(): JSX.Element {
         })}
       </ul>
 
-      <div className="w-full h-[360px] bg-BLUE-700 pt-12 rounded-t-[18px] absolute bottom-0">
+      <div className="w-full h-[360px] bg-BLUE-700 pt-12 rounded-t-[18px] fixed bottom-0">
         <h4 className="text-white font-poppinsBold w-[79.2vw] mx-auto">
           Rute Favorit
         </h4>
