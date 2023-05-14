@@ -1,6 +1,11 @@
 "use client";
 
-import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  LoadScript,
+  DirectionsService,
+  DirectionsRenderer,
+} from "@react-google-maps/api";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -30,6 +35,10 @@ export default function RouteFindingPage(): JSX.Element {
   const [route, setRoute] = useState("");
   const [routeAddress, setRouteAddress] = useState("");
   const [destination, setDestination] = useState("");
+  const [destCoord, setDestCoord] = useState("");
+  const [response, setResponse] = useState<google.maps.DirectionsResult | null>(
+    null
+  );
 
   const [stops, setStops] = useState<stop[]>([]);
 
@@ -53,7 +62,30 @@ export default function RouteFindingPage(): JSX.Element {
             center={center}
             zoom={15}
             options={{ disableDefaultUI: true }}
-          />
+            onClick={(e) => {
+              const temp = e.latLng?.toJSON();
+              setDestCoord(temp?.lat + "," + temp?.lng);
+            }}
+          >
+            {!response && destCoord ? (
+              <DirectionsService
+                options={{
+                  destination: destCoord,
+                  origin: "-6.893147,107.610441",
+                  travelMode: "DRIVING" as google.maps.TravelMode,
+                }}
+                callback={(response) => {
+                  console.log(response);
+                  setResponse(response);
+                }}
+              />
+            ) : null}
+            {response ? (
+              <DirectionsRenderer
+                options={{ directions: response, preserveViewport: true }}
+              />
+            ) : null}
+          </GoogleMap>
         </LoadScript>
       </div>
 

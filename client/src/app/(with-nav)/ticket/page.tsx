@@ -20,7 +20,7 @@ export default function TicketPage(): JSX.Element {
         Tiket Saya
       </h1>
       <p className="font-poppinsLight text-BROWN-700 mt-6">
-        Lihat nomor kendaraanmu dengan benar. Pastikan kamu mengescan barcode di
+        Lihat nomor kendaraanmu dengan benar. Pastikan kamu memindai barcode di
         scanner pada kendaraan!
       </p>
 

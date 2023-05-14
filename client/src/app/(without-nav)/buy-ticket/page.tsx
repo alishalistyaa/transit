@@ -115,7 +115,7 @@ export default function BuyTicketPage(): JSX.Element {
         })}
       </ul>
 
-      <div className="w-full h-[360px] bg-BLUE-700 pt-12 rounded-t-[18px] fixed bottom-0">
+      <div className="w-full h-[320px] bg-BLUE-700 pt-8 rounded-t-[18px] fixed bottom-0">
         <h4 className="text-white font-poppinsBold w-[79.2vw] mx-auto">
           Rute Favorit
         </h4>
