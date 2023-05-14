@@ -95,7 +95,10 @@ export default function RouteFindingPage(): JSX.Element {
         </div>
       </Link>
 
-      <div className="fixed bottom-0 w-full h-[360px] bg-white rounded-t-[50px]">
+      <div
+        style={{ opacity: response ? 1 : 0 }}
+        className="fixed bottom-0 w-full h-[360px] bg-white rounded-t-[50px]"
+      >
         <div className="flex justify-between pl-9 pr-8 pt-[50px] items-center">
           <div>
             <h3 className="font-poppinsBold text-lg text-black">2 Rute</h3>
