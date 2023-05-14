@@ -86,7 +86,7 @@ export default function RouteFindingPage(): JSX.Element {
 
             <div className="h-8 w-[3px] bg-GRAY-900" />
 
-            <div className="bg-GREEN-700 w-[43px] h-[44px] rounded-full flex items-center justify-center">
+            <div className="bg-GREEN-600 w-[43px] h-[44px] rounded-full flex items-center justify-center">
               <Image src={Checklist} width={19} height={15} alt="" />
             </div>
           </div>
@@ -117,7 +117,7 @@ export default function RouteFindingPage(): JSX.Element {
               </>
             ) : null}
 
-            <h3 className="font-poppinsBold text-xs text-GREEN-700 mt-6">
+            <h3 className="font-poppinsBold text-xs text-GREEN-600 mt-6">
               Sampai tujuan!
             </h3>
             <p className="font-poppinsLight text-[10px] text-black mt-0.5">
