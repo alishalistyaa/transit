@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import ArrowBack from "@/assets/icons/arrow-back.svg";
@@ -21,7 +22,9 @@ export default function PaymentPage(): JSX.Element {
   return (
     <main className="pb-12">
       <div className="flex items-center w-[86vw] mx-auto pt-8">
-        <Image src={ArrowBack} width={25} height={10} alt="" />
+        <Link href="/route-finding">
+          <Image src={ArrowBack} width={25} height={10} alt="" />
+        </Link>
         <h3 className="text-BROWN-600 font-jeko text-xl ml-6">Pembayaran</h3>
       </div>
 
@@ -92,9 +95,11 @@ export default function PaymentPage(): JSX.Element {
         </div>
       </ul>
 
-      <button className="w-[255px] mx-auto py-2 flex items-center justify-center bg-BLUE-700 shadow-[4px_4px_4px_rgba(0,0,0,0.25)] rounded-[36px] font-poppinsLight text-white text-sm mt-[62px]">
-        Selanjutnya
-      </button>
+      <Link href="/ticket">
+        <button className="w-[255px] mx-auto py-2 flex items-center justify-center bg-BLUE-700 shadow-[4px_4px_4px_rgba(0,0,0,0.25)] rounded-[36px] font-poppinsLight text-white text-sm mt-[62px]">
+          Selanjutnya
+        </button>
+      </Link>
     </main>
   );
 }

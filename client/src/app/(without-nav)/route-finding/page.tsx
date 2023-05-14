@@ -3,6 +3,7 @@
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import CarIcon from "@/assets/icons/car-icon.svg";
 import Checklist from "@/assets/icons/checklist.svg";
@@ -56,20 +57,24 @@ export default function RouteFindingPage(): JSX.Element {
         </LoadScript>
       </div>
 
-      <div className="absolute left-6 top-5 bg-white rounded-full border border-GRAY-600 w-[52px] h-[52px] flex items-center justify-center">
-        <Image src={ArrowBack} width={25} height={10} alt="" />
-      </div>
+      <Link href="/buy-ticket">
+        <div className="absolute left-6 top-5 bg-white rounded-full border border-GRAY-600 w-[52px] h-[52px] flex items-center justify-center">
+          <Image src={ArrowBack} width={25} height={10} alt="" />
+        </div>
+      </Link>
 
-      <div className="absolute bottom-0 w-full h-[360px] bg-white rounded-t-[50px]">
+      <div className="fixed bottom-0 w-full h-[360px] bg-white rounded-t-[50px]">
         <div className="flex justify-between pl-9 pr-8 pt-[50px] items-center">
           <div>
             <h3 className="font-poppinsBold text-lg text-black">2 Rute</h3>
             <p className="font-poppinsLight text-xs text-black mt-1">{route}</p>
           </div>
 
-          <button className="bg-BLUE-700 w-[122px] h-[35px] flex items-center justify-center font-poppinsLight text-white text-xs rounded-[36px]">
-            Beli Tiket
-          </button>
+          <Link href="/payment">
+            <button className="bg-BLUE-700 w-[122px] h-[35px] flex items-center justify-center font-poppinsLight text-white text-xs rounded-[36px]">
+              Beli Tiket
+            </button>
+          </Link>
         </div>
 
         <div className="px-10 flex mt-6">

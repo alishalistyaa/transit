@@ -2,14 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import CurrentLocation from "@/components/CurrentLocation";
 import DestinationInput from "@/components/DestinationInput";
 
-import SearchIcon from "@/assets/icons/search-icon.svg";
 import CardBackground from "@/assets/images/dashboard-card.png";
 import ArrowRight from "@/assets/icons/arrow-right.svg";
-import ArrowDown from "@/assets/icons/arrow-down.svg";
 import HistoryIcon from "@/assets/icons/history-icon.svg";
 import TransitLogo from "@/assets/images/transit-logo.png";
 
@@ -93,56 +92,102 @@ export default function DashboardPage(): JSX.Element {
           bersama kami!
         </p>
 
-        <button className="w-[92px] h-[29px] flex items-center justify-center bg-GREEN-600 mt-3.5 rounded-xl">
-          <Image src={ArrowRight} width={20} height={10} alt="" />
-        </button>
+        <Link href="/buy-ticket">
+          <button className="w-[92px] h-[29px] flex items-center justify-center bg-GREEN-600 mt-3.5 rounded-xl">
+            <Image src={ArrowRight} width={20} height={10} alt="" />
+          </button>
+        </Link>
       </div>
 
       <h2 className="font-jeko text-xl text-BROWN-700 tracking-[0.02] mt-6 ml-10">
         Moda Transportasi
       </h2>
 
-      {/* TODO: Set this toggle button to change opacity */}
       <div className="flex justify-between items-center mx-auto w-[320px] mt-3.5">
-        <button onClick={() => setBisChecked(!isBisChecked)}>
-          <Image
-            src={isBisChecked ? BisChecked : BisUnchecked}
-            width={60}
-            height={63}
-            alt=""
-          />
+        <button
+          className="relative w-[60px] h-[63px]"
+          onClick={() => setBisChecked(!isBisChecked)}
+        >
+          <div
+            className="absolute top-0 left-0 w-[60px] h-[63px]"
+            style={{ opacity: isBisChecked ? 1 : 0 }}
+          >
+            <Image src={BisChecked} width={60} height={63} alt="" />
+          </div>
+          <div
+            className="absolute top-0 left-0 w-[60px] h-[63px]"
+            style={{ opacity: !isBisChecked ? 1 : 0 }}
+          >
+            <Image src={BisUnchecked} width={60} height={63} alt="" />
+          </div>
         </button>
-        <button onClick={() => setAngkotChecked(!isAngkotChecked)}>
-          <Image
-            src={isAngkotChecked ? AngkotChecked : AngkotUnchecked}
-            width={60}
-            height={63}
-            alt=""
-          />
+        <button
+          className="relative w-[60px] h-[63px]"
+          onClick={() => setAngkotChecked(!isAngkotChecked)}
+        >
+          <div
+            className="absolute top-0 left-0 w-[60px] h-[63px]"
+            style={{ opacity: isAngkotChecked ? 1 : 0 }}
+          >
+            <Image src={AngkotChecked} width={60} height={63} alt="" />
+          </div>
+          <div
+            className="absolute top-0 left-0 w-[60px] h-[63px]"
+            style={{ opacity: !isAngkotChecked ? 1 : 0 }}
+          >
+            <Image src={AngkotUnchecked} width={60} height={63} alt="" />
+          </div>
         </button>
-        <button onClick={() => setKeretaChecked(!isKeretaChecked)}>
-          <Image
-            src={isKeretaChecked ? KeretaChecked : KeretaUnchecked}
-            width={60}
-            height={63}
-            alt=""
-          />
+        <button
+          className="relative w-[60px] h-[63px]"
+          onClick={() => setKeretaChecked(!isKeretaChecked)}
+        >
+          <div
+            className="absolute top-0 left-0 w-[60px] h-[63px]"
+            style={{ opacity: isKeretaChecked ? 1 : 0 }}
+          >
+            <Image src={KeretaChecked} width={60} height={63} alt="" />
+          </div>
+          <div
+            className="absolute top-0 left-0 w-[60px] h-[63px]"
+            style={{ opacity: !isKeretaChecked ? 1 : 0 }}
+          >
+            <Image src={KeretaUnchecked} width={60} height={63} alt="" />
+          </div>
         </button>
-        <button onClick={() => setSepedaChecked(!isSepedaChecked)}>
-          <Image
-            src={isSepedaChecked ? SepedaChecked : SepedaUnchecked}
-            width={60}
-            height={63}
-            alt=""
-          />
+        <button
+          className="relative w-[60px] h-[63px]"
+          onClick={() => setSepedaChecked(!isSepedaChecked)}
+        >
+          <div
+            className="absolute top-0 left-0 w-[60px] h-[63px]"
+            style={{ opacity: isSepedaChecked ? 1 : 0 }}
+          >
+            <Image src={SepedaChecked} width={60} height={63} alt="" />
+          </div>
+          <div
+            className="absolute top-0 left-0 w-[60px] h-[63px]"
+            style={{ opacity: !isSepedaChecked ? 1 : 0 }}
+          >
+            <Image src={SepedaUnchecked} width={60} height={63} alt="" />
+          </div>
         </button>
-        <button onClick={() => setTransitChecked(!isTransitChecked)}>
-          <Image
-            src={isTransitChecked ? TransitChecked : TransitUnchecked}
-            width={60}
-            height={63}
-            alt=""
-          />
+        <button
+          className="relative w-[60px] h-[63px]"
+          onClick={() => setTransitChecked(!isTransitChecked)}
+        >
+          <div
+            className="absolute top-0 left-0 w-[60px] h-[63px]"
+            style={{ opacity: isTransitChecked ? 1 : 0 }}
+          >
+            <Image src={TransitChecked} width={60} height={63} alt="" />
+          </div>
+          <div
+            className="absolute top-0 left-0 w-[60px] h-[63px]"
+            style={{ opacity: !isTransitChecked ? 1 : 0 }}
+          >
+            <Image src={TransitUnchecked} width={60} height={63} alt="" />
+          </div>
         </button>
       </div>
 
@@ -151,7 +196,7 @@ export default function DashboardPage(): JSX.Element {
         <p className="font-poppinsLight text-xs text-BROWN-700">Semua</p>
       </div>
 
-      <ul className="mt-5 pl-10 pr-7 pb-10">
+      <ul className="mt-5 pl-10 pr-7 pb-10 mb-16 h-[16.8vh] overflow-auto">
         {histories.map((history, index) => (
           <div key={index} className="flex first:mt-0 mt-2">
             <div className="w-[50px] h-[53px] flex items-center justify-center rounded-xl bg-BLUE-700">

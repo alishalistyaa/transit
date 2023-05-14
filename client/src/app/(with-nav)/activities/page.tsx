@@ -66,7 +66,7 @@ export default function ActivitesPage(): JSX.Element {
         Aktivitas
       </h1>
 
-      <ul className="overflow-auto max-h-[70.5vh] mt-6">
+      <ul className="overflow-auto max-h-[70.5vh] mt-6 pb-16">
         {activites?.map((activity, index) => (
           <div
             key={index}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import CurrentLocation from "@/components/CurrentLocation";
 import DestinationInput from "@/components/DestinationInput";
@@ -76,7 +77,9 @@ export default function BuyTicketPage(): JSX.Element {
   return (
     <main className="relative">
       <div className="flex items-center pt-8 justify-between w-[80.7vw] mx-auto">
-        <Image src={ArrowBack} width={25} height={10} alt="" />
+        <Link href="/dashboard">
+          <Image src={ArrowBack} width={25} height={10} alt="" />
+        </Link>
         <CurrentLocation address={address} />
       </div>
 
@@ -87,7 +90,7 @@ export default function BuyTicketPage(): JSX.Element {
         />
       </div>
 
-      <ul className="mt-5">
+      <ul className="mt-5 h-[38.3vh] overflow-hidden pb-10">
         {stops.map((stop, index) => {
           const title =
             stop.title.length > 20
@@ -100,11 +103,13 @@ export default function BuyTicketPage(): JSX.Element {
 
           return (
             <div key={index} className="first:mt-0 mt-3">
-              <NearestStop
-                distance={stop.distance}
-                title={title}
-                address={address}
-              />
+              <Link href="route-finding">
+                <NearestStop
+                  distance={stop.distance}
+                  title={title}
+                  address={address}
+                />
+              </Link>
             </div>
           );
         })}
@@ -115,23 +120,27 @@ export default function BuyTicketPage(): JSX.Element {
           Rute Favorit
         </h4>
 
-        <div className="mt-7">
-          <FavouriteRoute
-            route={firstFavRoute?.route}
-            title={firstFavRoute?.title}
-            distance={firstFavRoute?.distance}
-            date={firstFavRoute?.date}
-          />
-        </div>
+        <Link href="/route-finding">
+          <div className="mt-7">
+            <FavouriteRoute
+              route={firstFavRoute?.route}
+              title={firstFavRoute?.title}
+              distance={firstFavRoute?.distance}
+              date={firstFavRoute?.date}
+            />
+          </div>
+        </Link>
 
-        <div className="mt-6">
-          <FavouriteRoute
-            route={secondFavRoute?.route}
-            title={secondFavRoute?.title}
-            distance={secondFavRoute?.distance}
-            date={secondFavRoute?.date}
-          />
-        </div>
+        <Link href="/route-finding">
+          <div className="mt-6">
+            <FavouriteRoute
+              route={secondFavRoute?.route}
+              title={secondFavRoute?.title}
+              distance={secondFavRoute?.distance}
+              date={secondFavRoute?.date}
+            />
+          </div>
+        </Link>
       </div>
     </main>
   );
