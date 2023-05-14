@@ -21,7 +21,7 @@ export default function Home() {
         </h2>
       </div>
 
-      <div className="h-[39.5vh] flex flex-col items-center justify-center">
+      <div className="h-[39.5vh] flex flex-col items-center justify-center  ">
         <Link href="/login">
           <button className="w-[250px] border border-BROWN-900 rounded-3xl bg-white flex items-center justify-center font-poppinsBold text-BROWN-900 tracking-[0.5px] py-2">
             Log In
