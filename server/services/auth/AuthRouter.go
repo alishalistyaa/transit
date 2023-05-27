@@ -7,6 +7,6 @@ import (
 func RouteAuth(router *gin.RouterGroup) {
 	authGroup := router.Group("/auth")
 
-	authGroup.GET("/tester", AuthTester)
 	authGroup.POST("/signup", Signup)
+	authGroup.POST("/login", Login)
 }

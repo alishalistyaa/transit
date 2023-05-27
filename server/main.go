@@ -18,11 +18,9 @@ func setupRouter() *gin.Engine {
 }
 
 func main() {
-
 	if err := database.ConnectDB(); err != nil {
-		fmt.Println("Cannot connect to database")
+		fmt.Println("Database connection failed: ", err.Error())
 	} else {
-		fmt.Println("Connected to database")
 		setupRouter().Run(":5000")
 	}
 }
