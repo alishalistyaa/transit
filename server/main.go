@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+	"transit-server/database"
 	"transit-server/services/auth"
 
 	"github.com/gin-gonic/gin"
@@ -8,11 +10,19 @@ import (
 
 func setupRouter() *gin.Engine {
 	router := gin.Default()
-	auth.RouteAuth(router)
+
+	v1 := router.Group("/api/v1")
+	auth.RouteAuth(v1)
 
 	return router
 }
 
 func main() {
-	setupRouter().Run(":5000")
+
+	if err := database.ConnectDB(); err != nil {
+		fmt.Println("Cannot connect to database")
+	} else {
+		fmt.Println("Connected to database")
+		setupRouter().Run(":5000")
+	}
 }
