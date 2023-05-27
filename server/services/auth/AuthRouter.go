@@ -9,4 +9,5 @@ func RouteAuth(router *gin.RouterGroup) {
 
 	authGroup.POST("/signup", Signup)
 	authGroup.POST("/login", Login)
+	authGroup.GET("/tester", AuthToken(), AuthTester)
 }

@@ -78,3 +78,13 @@ func Login(context *gin.Context) {
 
 	context.JSON(http.StatusOK, gin.H{"message": token})
 }
+
+func AuthTester(context *gin.Context) {
+	email, ok := context.Get("email")
+
+	if !ok {
+		context.JSON(http.StatusBadRequest, gin.H{"message": "no token provided"})
+	}
+
+	context.JSON(http.StatusOK, gin.H{"message": email})
+}
