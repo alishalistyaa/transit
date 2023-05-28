@@ -17,7 +17,6 @@ type SignupInput struct {
 func HandleSignup(context *gin.Context) {
 	var (
 		input SignupInput
-		user  models.User
 		token string
 	)
 
@@ -26,6 +25,7 @@ func HandleSignup(context *gin.Context) {
 		return
 	}
 
+	user := models.User{}
 	user.Email = input.Email
 	user.Password = input.Password
 

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"transit-server/database"
 	"transit-server/services/auth"
+	"transit-server/services/stop"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,6 +14,7 @@ func setupRouter() *gin.Engine {
 
 	v1 := router.Group("/api/v1")
 	auth.RouteAuth(v1)
+	stop.RouteStop(v1)
 
 	return router
 }
