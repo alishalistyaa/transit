@@ -8,7 +8,8 @@ import (
 )
 
 type User struct {
-	Email    string `gorm:"primaryKey"`
+	UserId   string `gorm:"primaryKey"`
+	Email    string
 	Name     string
 	Password string
 	Address  string

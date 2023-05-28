@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func AuthToken() gin.HandlerFunc {
+func ValidateToken() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		email, err := ExtractToken(context)
 

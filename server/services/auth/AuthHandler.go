@@ -14,10 +14,11 @@ type SignupInput struct {
 	Password string `json:"password" binding:"required"`
 }
 
-func Signup(context *gin.Context) {
+func HandleSignup(context *gin.Context) {
 	var (
 		input SignupInput
 		user  models.User
+		token string
 	)
 
 	if err := context.ShouldBindJSON(&input); err != nil {
@@ -35,7 +36,14 @@ func Signup(context *gin.Context) {
 		return
 	}
 
-	context.JSON(http.StatusOK, gin.H{"message": "success"})
+	token, err = GenerateToken(input.Email)
+
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"message": token})
 }
 
 type LoginInput struct {
@@ -43,7 +51,7 @@ type LoginInput struct {
 	Password string `json:"password" binding:"required"`
 }
 
-func Login(context *gin.Context) {
+func HandleLogin(context *gin.Context) {
 	var (
 		input LoginInput
 		token string
@@ -77,14 +85,4 @@ func Login(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, gin.H{"message": token})
-}
-
-func AuthTester(context *gin.Context) {
-	email, ok := context.Get("email")
-
-	if !ok {
-		context.JSON(http.StatusBadRequest, gin.H{"message": "no token provided"})
-	}
-
-	context.JSON(http.StatusOK, gin.H{"message": email})
 }
