@@ -7,4 +7,7 @@ func RouteConnection(router *gin.RouterGroup) {
 
 	connectionGroup.POST("/", HandleConnectStop)
 	connectionGroup.DELETE("/", HandleDeleteConnection)
+
+	connectionGroup.POST("/point", HandleAddConnPoint)
+	connectionGroup.DELETE("/point", HandleDeleteConnPoint)
 }
