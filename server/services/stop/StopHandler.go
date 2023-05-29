@@ -51,6 +51,11 @@ func HandleGetStop(context *gin.Context) {
 
 	stopId := context.Query("stopId")
 
+	if stopId == "" {
+		context.JSON(http.StatusBadRequest, gin.H{"message": "stop id must be provided"})
+		return
+	}
+
 	err := database.DB.Model(models.Stop{}).Select("name, ST_X(coord) AS lng, ST_Y(coord) AS lat, address").Where("stop_id = ?", stopId).First(&result).Error
 
 	if err != nil {
