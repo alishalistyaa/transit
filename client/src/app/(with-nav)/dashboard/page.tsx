@@ -22,6 +22,7 @@ import SepedaUnchecked from "@/assets/icons/sepeda-unchecked.svg";
 import SepedaChecked from "@/assets/icons/sepeda-checked.svg";
 import TransitUnchecked from "@/assets/icons/transit-unchecked.svg";
 import TransitChecked from "@/assets/icons/transit-checked.svg";
+import useSession from "@/hooks/useSession";
 
 type history = {
   location: string;
@@ -29,6 +30,8 @@ type history = {
 };
 
 export default function DashboardPage(): JSX.Element {
+  useSession();
+
   const [address, setAddress] = useState("");
   const [username, setUsername] = useState("");
   const [destination, setDestination] = useState("");

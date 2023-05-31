@@ -10,6 +10,7 @@ import FavouriteRoute from "@/components/FavouriteRoute";
 import NearestStop from "@/components/NearestStop";
 
 import ArrowBack from "@/assets/icons/arrow-back.svg";
+import useSession from "@/hooks/useSession";
 
 type stop = {
   distance: number;
@@ -25,6 +26,8 @@ type favRoute = {
 };
 
 export default function BuyTicketPage(): JSX.Element {
+  useSession();
+
   const [address, setAddress] = useState("");
   const [destination, setDestination] = useState("");
   const [stops, setStops] = useState<stop[]>([]);

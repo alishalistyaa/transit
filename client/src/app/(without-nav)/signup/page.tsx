@@ -1,17 +1,48 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 import InputField from "@/components/InputField";
 
 import ArrowRight from "@/assets/icons/arrow-right.svg";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export default function SignupPage(): JSX.Element {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
+
+  const router = useRouter();
+
+  const handleSubmit = async (e: FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    if (password !== confirmPass) {
+      alert("Password does not match");
+      return;
+    }
+
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "/auth/login", {
+      method: "POST",
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    const { message } = await res.json();
+
+    if (res.ok && message) {
+      Cookies.set("jwt", message);
+      router.push("/dashboard");
+    } else {
+      alert("Invalid login");
+    }
+  };
 
   return (
     <main className="h-[100vh] w-full flex flex-col items-center justify-center">

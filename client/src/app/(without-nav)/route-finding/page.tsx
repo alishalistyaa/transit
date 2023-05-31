@@ -13,6 +13,7 @@ import Link from "next/link";
 import CarIcon from "@/assets/icons/car-icon.svg";
 import Checklist from "@/assets/icons/checklist.svg";
 import ArrowBack from "@/assets/icons/arrow-back.svg";
+import useSession from "@/hooks/useSession";
 
 const MAPS_API_KEY = "AIzaSyAoFTL5YjSh3urWT3I1896Cp1F3TdCMsq8";
 
@@ -32,6 +33,8 @@ type stop = {
 };
 
 export default function RouteFindingPage(): JSX.Element {
+  useSession();
+
   const [route, setRoute] = useState("");
   const [routeAddress, setRouteAddress] = useState("");
   const [destination, setDestination] = useState("");

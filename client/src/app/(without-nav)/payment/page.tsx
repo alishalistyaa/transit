@@ -10,8 +10,11 @@ import CardExample from "@/assets/images/card-example.png";
 import DashedBorder from "@/assets/icons/dashed-border.svg";
 import GopayLogo from "@/assets/images/gopay-logo.png";
 import DanaLogo from "@/assets/images/dana-logo.png";
+import useSession from "@/hooks/useSession";
 
 export default function PaymentPage(): JSX.Element {
+  useSession();
+
   const [total, setTotal] = useState("");
   const [promoCode, setPromoCode] = useState("");
 

@@ -1,5 +1,6 @@
 "use client";
 
+import useSession from "@/hooks/useSession";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 
@@ -11,6 +12,8 @@ type activity = {
 };
 
 export default function ActivitesPage(): JSX.Element {
+  useSession();
+
   const [activites, setActivites] = useState<activity[]>();
 
   useEffect(() => {

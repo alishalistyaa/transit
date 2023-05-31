@@ -13,6 +13,7 @@ import TicketSelected from "@/assets/icons/ticket-selected.svg";
 import TicketIcon from "@/assets/icons/ticket-icon.svg";
 import ProfileSelected from "@/assets/icons/profile-selected.svg";
 import ProfileIcon from "@/assets/icons/profile-icon.svg";
+import useSession from "@/hooks/useSession";
 
 export default function NavLayout({ children }: { children: React.ReactNode }) {
   const currentPath = usePathname();

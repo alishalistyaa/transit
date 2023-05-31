@@ -4,8 +4,11 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import QRImage from "@/assets/images/qr-image.png";
+import useSession from "@/hooks/useSession";
 
 export default function TicketPage(): JSX.Element {
+  useSession();
+
   const [date, setDate] = useState<Date>();
   const [code, setCode] = useState(0);
 
