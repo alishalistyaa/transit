@@ -34,9 +34,6 @@ func FindPath(stops []models.Stop, connections []models.Connection, srcIndex, de
 
 		adjMatrix[firstStopIdx][secondStopIdx].Actual = distance
 		adjMatrix[firstStopIdx][secondStopIdx].Heuristic = distance
-
-		adjMatrix[secondStopIdx][firstStopIdx].Actual = distance
-		adjMatrix[secondStopIdx][firstStopIdx].Heuristic = distance
 	}
 
 	for i := 0; i < len(adjMatrix); i++ {
@@ -58,6 +55,7 @@ func FindPath(stops []models.Stop, connections []models.Connection, srcIndex, de
 		for i := 0; i < len(adjMatrix[currIndex]); i++ {
 			if adjMatrix[currIndex][i].Actual != 0 {
 				newPath := pathEntry{}
+				newPath.Nodes = make([]int, len(currPath.Nodes))
 				copy(newPath.Nodes, currPath.Nodes)
 				newPath.Nodes = append(newPath.Nodes, i)
 				newPath.Cost = currPath.Cost + adjMatrix[currIndex][i].Actual + adjMatrix[currIndex][i].Heuristic
@@ -77,6 +75,7 @@ func FindPath(stops []models.Stop, connections []models.Connection, srcIndex, de
 	}
 
 	result := GetRouteResult{[]models.Stop{}, []coordinate{}}
+
 	for i := 0; i < len(finalPath.Nodes); i++ {
 		currStop := stops[finalPath.Nodes[i]]
 		result.Stops = append(result.Stops, currStop)

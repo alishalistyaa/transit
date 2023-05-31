@@ -8,11 +8,17 @@ import (
 	"transit-server/services/route"
 	"transit-server/services/stop"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func setupRouter() *gin.Engine {
 	router := gin.Default()
+
+	router.Use(cors.New(cors.Config{
+		AllowAllOrigins: true,
+		AllowHeaders:    []string{"authorization", "content-type"},
+	}))
 
 	v1 := router.Group("/api/v1")
 

@@ -5,7 +5,7 @@ type PrioQueue []pathEntry
 func (q *PrioQueue) Enqueue(p pathEntry) {
 	(*q) = append((*q), p)
 
-	for i := len(*q) - 2; (*q)[i].Cost > p.Cost; i-- {
+	for i := len(*q) - 2; i >= 0 && (*q)[i].Cost > p.Cost; i-- {
 		temp := (*q)[i+1]
 		(*q)[i+1] = (*q)[i]
 		(*q)[i] = temp

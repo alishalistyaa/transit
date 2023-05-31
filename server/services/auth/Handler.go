@@ -86,3 +86,14 @@ func HandleLogin(context *gin.Context) {
 
 	context.JSON(http.StatusOK, gin.H{"message": token})
 }
+
+func HandleValidate(context *gin.Context) {
+	_, err := ExtractToken(context)
+
+	if err != nil {
+		context.JSON(http.StatusUnauthorized, gin.H{"message": err.Error()})
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"message": "authorized"})
+}

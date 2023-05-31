@@ -63,14 +63,14 @@ func HandleGetRoute(context *gin.Context) {
 			destIndex = i
 			minDistance = currDistance
 		}
-
-		result, err = FindPath(stops, connections, srcIndex, destIndex)
-
-		if err != nil {
-			context.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
-			return
-		}
-
-		context.JSON(http.StatusOK, gin.H{"message": result})
 	}
+
+	result, err = FindPath(stops, connections, srcIndex, destIndex)
+
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"message": result})
 }

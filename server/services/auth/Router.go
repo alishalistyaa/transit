@@ -9,4 +9,5 @@ func RouteAuth(router *gin.RouterGroup) {
 
 	authGroup.POST("/signup", HandleSignup)
 	authGroup.POST("/login", HandleLogin)
+	authGroup.POST("/validate", HandleValidate)
 }
