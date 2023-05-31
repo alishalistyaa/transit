@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Cookies from "js-cookie";
 
 import CurrentLocation from "@/components/CurrentLocation";
 import DestinationInput from "@/components/DestinationInput";
@@ -23,6 +24,7 @@ import SepedaChecked from "@/assets/icons/sepeda-checked.svg";
 import TransitUnchecked from "@/assets/icons/transit-unchecked.svg";
 import TransitChecked from "@/assets/icons/transit-checked.svg";
 import useSession from "@/hooks/useSession";
+import { useRouter } from "next/navigation";
 
 type history = {
   location: string;
@@ -44,9 +46,44 @@ export default function DashboardPage(): JSX.Element {
 
   const [histories, setHistories] = useState<history[]>([]);
 
+  const router = useRouter();
+  const fetchUserData = async () => {
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "/user/", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${Cookies.get("jwt")}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return res;
+  };
+
+  const MAPS_API_KEY = "AIzaSyAoFTL5YjSh3urWT3I1896Cp1F3TdCMsq8";
+  const fetchLocationAddress = async (lat: number, lng: number) => {
+    return await fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${MAPS_API_KEY}`
+    );
+  };
+
   useEffect(() => {
-    setAddress("Jl. Bojongsoang No.3");
-    setUsername("Vanessa Rebecca");
+    if (Cookies.get("jwt")) {
+      fetchUserData()
+        .then((res) => (res.ok ? res.json() : router.push("/login")))
+        .then((data) => setUsername(data.message.Name))
+        .catch((err) => console.error(err));
+    }
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((pos) =>
+        fetchLocationAddress(pos.coords.latitude, pos.coords.longitude)
+          .then((res) => res.json())
+          .then((data) =>
+            setAddress(data.results[0].address_components[1].short_name)
+          )
+          .catch((err) => console.error(err))
+      );
+    }
+
     setHistories([
       {
         location: "Institut Teknologi Bandung",
@@ -61,7 +98,7 @@ export default function DashboardPage(): JSX.Element {
         address: "Jalan Ganesha No. 81, Sekeloa",
       },
     ]);
-  }, []);
+  }, [router]);
 
   return (
     <main>
@@ -199,7 +236,7 @@ export default function DashboardPage(): JSX.Element {
         <p className="font-poppinsLight text-xs text-BROWN-700">Semua</p>
       </div>
 
-      <ul className="mt-5 pl-10 pr-7 pb-10 mb-16 h-[16.8vh] overflow-auto">
+      <ul className="mt-5 pl-10 pr-7 pb-10 mb-20 overflow-auto">
         {histories.map((history, index) => (
           <div key={index} className="flex first:mt-0 mt-2">
             <div className="w-[50px] h-[53px] flex items-center justify-center rounded-xl bg-BLUE-700">

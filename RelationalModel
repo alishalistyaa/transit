@@ -1,0 +1,27 @@
+Users (|userId|, email, password, name, address, phone, age)
+Tickets (|paymentCode|, QRImage, bookDate, totalPrice, userId)
+Routes (|routeId|, name, price)
+Vehicles (|vehicleId|, currLat, currLng, type, capacity, routeId, driverId)
+Drivers (|driverId|, email, password, name, phone)
+Stops (|stopId|, lat, lng, address, name)
+Connections (|firstStopId|, |secondStopId|)
+ConnectionPoints (|firstStopId|, |secondStopId|, |pointLat|, |pointLng|)
+RouteConnections (|routeId|, |firstStopId|, |secondStopId|)
+Activites (|userId|, |bookTime|, totalPrice, status)
+TicketRoutes (|paymentCode|, |routeId|)
+
+Foreign Keys
+Tickets (userId) -> Users (userId)
+Vehicles (routeId) -> Routes (routeId
+Vehicles (driverId) -> Drivers (driverId)
+Connections (firstStopId) -> Stops (stopId)
+Connections (secondStopId) -> Stops (stopId)
+RouteConnections (routeId) -> Routes (routeId)
+Activites (userId) -> Users (userId)
+TicketRoutes (paymentCode) -> Tickets (paymentCode)
+TicketRoutes (routeId) -> Routes (routeId)
+
+Functional Dependencies
+Users : email -> userId, password, name, address, phone, age
+Drivers : email -> driverId, password, name, phone
+Stops : lat, lng -> stopId, address, name

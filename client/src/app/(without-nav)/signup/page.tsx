@@ -11,6 +11,7 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
 export default function SignupPage(): JSX.Element {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
@@ -25,9 +26,10 @@ export default function SignupPage(): JSX.Element {
       return;
     }
 
-    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "/auth/login", {
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "/auth/signup", {
       method: "POST",
       body: JSON.stringify({
+        name,
         email,
         password,
       }),
@@ -49,6 +51,15 @@ export default function SignupPage(): JSX.Element {
       <h1 className="w-[64.1vw] tracking-[0.2px] font-jeko text-[32px] text-BROWN-600">
         Register
       </h1>
+
+      <div className="mt-4">
+        <InputField
+          onChange={(e) => setName(e.target.value)}
+          placeholder="full name"
+          value={name}
+          isPassword={false}
+        />
+      </div>
 
       <div className="mt-4">
         <InputField
@@ -78,14 +89,17 @@ export default function SignupPage(): JSX.Element {
       </div>
 
       <div className="w-[64.1vw] flex justify-end mt-14">
-        <Link href="/dashboard">
-          <button className="bg-BROWN-900 w-[102px] rounded-[10px] flex items-center justify-between pl-3.5 pr-2.5 py-2">
-            <p className="font-jeko text-white text-xs tracking-[0.2px] pt-0.5">
-              Next
-            </p>
-            <Image src={ArrowRight} width={13} height={5} alt="" />
-          </button>
-        </Link>
+        {/* <Link href="/dashboard"> */}
+        <button
+          className="bg-BROWN-900 w-[102px] rounded-[10px] flex items-center justify-between pl-3.5 pr-2.5 py-2"
+          onClick={handleSubmit}
+        >
+          <p className="font-jeko text-white text-xs tracking-[0.2px] pt-0.5">
+            Next
+          </p>
+          <Image src={ArrowRight} width={13} height={5} alt="" />
+        </button>
+        {/* </Link> */}
       </div>
     </main>
   );

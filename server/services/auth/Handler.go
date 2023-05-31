@@ -10,6 +10,7 @@ import (
 )
 
 type SignupInput struct {
+	Name     string `json:"name" binding:"required"`
 	Email    string `json:"email" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
@@ -26,6 +27,7 @@ func HandleSignup(context *gin.Context) {
 	}
 
 	user := models.User{}
+	user.Name = input.Name
 	user.Email = input.Email
 	user.Password = input.Password
 
