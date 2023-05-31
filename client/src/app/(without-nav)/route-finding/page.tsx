@@ -3,6 +3,7 @@
 import {
   GoogleMap,
   LoadScript,
+  Marker,
   DirectionsService,
   DirectionsRenderer,
 } from "@react-google-maps/api";
@@ -13,9 +14,11 @@ import Link from "next/link";
 import CarIcon from "@/assets/icons/car-icon.svg";
 import Checklist from "@/assets/icons/checklist.svg";
 import ArrowBack from "@/assets/icons/arrow-back.svg";
+import CustomMarker from "@/assets/icons/checklist.svg";
 import useSession from "@/hooks/useSession";
 
 const MAPS_API_KEY = "AIzaSyAoFTL5YjSh3urWT3I1896Cp1F3TdCMsq8";
+
 
 const containerStyle = {
   width: "100vw",
@@ -32,6 +35,11 @@ type stop = {
   stopName: string;
 };
 
+type MarkerType = {
+  position: google.maps.LatLngLiteral;
+  icon: string;
+};
+
 export default function RouteFindingPage(): JSX.Element {
   useSession();
 
@@ -44,6 +52,7 @@ export default function RouteFindingPage(): JSX.Element {
   );
 
   const [stops, setStops] = useState<stop[]>([]);
+  const [markers, setMarkers] = useState<MarkerType[]>([]);
 
   useEffect(() => {
     setRoute("Dago - Cicaheum");
@@ -68,6 +77,21 @@ export default function RouteFindingPage(): JSX.Element {
             onClick={(e) => {
               const temp = e.latLng?.toJSON();
               setDestCoord(temp?.lat + "," + temp?.lng);
+
+              if (!temp) {
+                return 
+              }
+
+              const newMarker = {
+                position: temp,
+                icon: CustomMarker,
+              };
+
+                setMarkers((prevMarkers) => 
+                    [...prevMarkers, newMarker]
+                );
+
+
             }}
           >
             {!response && destCoord ? (
@@ -87,7 +111,17 @@ export default function RouteFindingPage(): JSX.Element {
               <DirectionsRenderer
                 options={{ directions: response, preserveViewport: true }}
               />
+              
             ) : null}
+
+            {markers.map((marker, index) => (
+              <Marker
+                key={index}
+                position={marker.position}
+                icon={marker.icon}
+              />
+            ))}
+
           </GoogleMap>
         </LoadScript>
       </div>
