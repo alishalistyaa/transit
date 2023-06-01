@@ -8,4 +8,5 @@ func RouteStop(router *gin.RouterGroup) {
 	stopGroup.POST("/", HandleAddStop)
 	stopGroup.GET("/", HandleGetStop)
 	stopGroup.DELETE("/", HandleDeleteStop)
+	stopGroup.GET("/nearest", HandleGetNearestStop)
 }

@@ -23,6 +23,6 @@ export default function useSession() {
       );
       return res;
     };
-    checkSession().then((res) => (!res.ok ? router.push("/login") : null));
+    checkSession().then((res) => (!res.ok ? router.push("/") : null));
   }, [router]);
 }

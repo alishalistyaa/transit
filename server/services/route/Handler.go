@@ -9,14 +9,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type coordinate struct {
+type Coordinate struct {
 	Lat float64
 	Lng float64
 }
 
 type GetRouteResult struct {
 	Stops []models.Stop
-	Path  []coordinate
+	Path  []Coordinate
 }
 
 func HandleGetRoute(context *gin.Context) {
@@ -57,7 +57,7 @@ func HandleGetRoute(context *gin.Context) {
 			srcIndex = i
 		}
 
-		currDistance := HaversineDistance(coordinate{stops[i].Lat, stops[i].Lng}, coordinate{destLat, destLng})
+		currDistance := HaversineDistance(Coordinate{stops[i].Lat, stops[i].Lng}, Coordinate{destLat, destLng})
 
 		if currDistance < minDistance {
 			destIndex = i

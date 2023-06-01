@@ -13,159 +13,181 @@ import TicketSelected from "@/assets/icons/ticket-selected.svg";
 import TicketIcon from "@/assets/icons/ticket-icon.svg";
 import ProfileSelected from "@/assets/icons/profile-selected.svg";
 import ProfileIcon from "@/assets/icons/profile-icon.svg";
+
 import useSession from "@/hooks/useSession";
+import Cookies from "js-cookie";
 
 export default function NavLayout({ children }: { children: React.ReactNode }) {
+  useSession();
+
   const currentPath = usePathname();
 
-  return (
-    <>
-      {children}
-      <nav className="fixed bottom-0 w-full bg-BROWN-900 rounded-t-[10px]">
-        <ul className="w-[271px] mx-auto flex justify-between">
-          <Link href="/dashboard">
-            <div
-              className={clsx(
-                "py-3.5 flex flex-col items-center w-[53px] border-t-[5px]",
-                currentPath === "/dashboard"
-                  ? " border-GREEN-300"
-                  : "border-transparent"
-              )}
-            >
-              <div className="relative w-[25px] h-[25px]">
-                <div
-                  style={{ opacity: currentPath === "/dashboard" ? 1 : 0 }}
-                  className="absolute left-0 top-0"
-                >
-                  <Image src={HomeSelected} width={25} height={25} alt="" />
-                </div>
-                <div
-                  style={{ opacity: currentPath !== "/dashboard" ? 1 : 0 }}
-                  className="absolute left-0 top-0"
-                >
-                  <Image src={HomeIcon} width={25} height={25} alt="" />
-                </div>
-              </div>
-
-              <p
+  if (Cookies.get("jwt")) {
+    return (
+      <>
+        {children}
+        <nav className="fixed bottom-0 w-full bg-BROWN-900 rounded-t-[10px]">
+          <ul className="w-[271px] mx-auto flex justify-between">
+            <Link href="/dashboard">
+              <div
                 className={clsx(
-                  "font-poppinsBold text-[8px] mt-3",
-                  currentPath === "/dashboard" ? "text-GREEN-300" : "text-white"
+                  "py-3.5 flex flex-col items-center w-[53px] border-t-[5px]",
+                  currentPath === "/dashboard"
+                    ? " border-GREEN-300"
+                    : "border-transparent"
                 )}
               >
-                Home
-              </p>
-            </div>
-          </Link>
+                <div className="relative w-[25px] h-[25px]">
+                  <div
+                    style={{ opacity: currentPath === "/dashboard" ? 1 : 0 }}
+                    className="absolute left-0 top-0"
+                  >
+                    <Image src={HomeSelected} width={25} height={25} alt="" />
+                  </div>
+                  <div
+                    style={{ opacity: currentPath !== "/dashboard" ? 1 : 0 }}
+                    className="absolute left-0 top-0"
+                  >
+                    <Image src={HomeIcon} width={25} height={25} alt="" />
+                  </div>
+                </div>
 
-          <Link href="/activities">
-            <div
-              className={clsx(
-                "py-3.5 flex flex-col items-center w-[53px] border-t-[5px]",
-                currentPath === "/activities"
-                  ? " border-GREEN-300"
-                  : "border-transparent"
-              )}
-            >
-              <div className="relative w-[25px] h-[25px]">
-                <div
-                  style={{ opacity: currentPath === "/activities" ? 1 : 0 }}
-                  className="absolute left-0 top-0"
+                <p
+                  className={clsx(
+                    "font-poppinsBold text-[8px] mt-3",
+                    currentPath === "/dashboard"
+                      ? "text-GREEN-300"
+                      : "text-white"
+                  )}
                 >
-                  <Image src={ActivitySelected} width={25} height={25} alt="" />
-                </div>
-                <div
-                  style={{ opacity: currentPath !== "/activities" ? 1 : 0 }}
-                  className="absolute left-0 top-0"
-                >
-                  <Image src={ActivityIcon} width={25} height={25} alt="" />
-                </div>
+                  Home
+                </p>
               </div>
+            </Link>
 
-              <p
+            <Link href="/activities">
+              <div
                 className={clsx(
-                  "font-poppinsBold text-[8px] mt-3",
+                  "py-3.5 flex flex-col items-center w-[53px] border-t-[5px]",
                   currentPath === "/activities"
-                    ? "text-GREEN-300"
-                    : "text-white"
+                    ? " border-GREEN-300"
+                    : "border-transparent"
                 )}
               >
-                Aktivitas
-              </p>
-            </div>
-          </Link>
+                <div className="relative w-[25px] h-[25px]">
+                  <div
+                    style={{ opacity: currentPath === "/activities" ? 1 : 0 }}
+                    className="absolute left-0 top-0"
+                  >
+                    <Image
+                      src={ActivitySelected}
+                      width={25}
+                      height={25}
+                      alt=""
+                    />
+                  </div>
+                  <div
+                    style={{ opacity: currentPath !== "/activities" ? 1 : 0 }}
+                    className="absolute left-0 top-0"
+                  >
+                    <Image src={ActivityIcon} width={25} height={25} alt="" />
+                  </div>
+                </div>
 
-          <Link href="/ticket">
-            <div
-              className={clsx(
-                "py-3.5 flex flex-col items-center w-[53px] border-t-[5px]",
-                currentPath === "/ticket"
-                  ? " border-GREEN-300"
-                  : "border-transparent"
-              )}
-            >
-              <div className="relative w-[25px] h-[25px]">
-                <div
-                  style={{ opacity: currentPath === "/ticket" ? 1 : 0 }}
-                  className="absolute left-0 top-0"
+                <p
+                  className={clsx(
+                    "font-poppinsBold text-[8px] mt-3",
+                    currentPath === "/activities"
+                      ? "text-GREEN-300"
+                      : "text-white"
+                  )}
                 >
-                  <Image src={TicketSelected} width={25} height={25} alt="" />
-                </div>
-                <div
-                  style={{ opacity: currentPath !== "/ticket" ? 1 : 0 }}
-                  className="absolute left-0 top-0"
-                >
-                  <Image src={TicketIcon} width={25} height={25} alt="" />
-                </div>
+                  Aktivitas
+                </p>
               </div>
+            </Link>
 
-              <p
+            <Link href="/ticket">
+              <div
                 className={clsx(
-                  "font-poppinsBold text-[8px] mt-3",
-                  currentPath === "/ticket" ? "text-GREEN-300" : "text-white"
+                  "py-3.5 flex flex-col items-center w-[53px] border-t-[5px]",
+                  currentPath === "/ticket"
+                    ? " border-GREEN-300"
+                    : "border-transparent"
                 )}
               >
-                Tiketmu
-              </p>
-            </div>
-          </Link>
+                <div className="relative w-[25px] h-[25px]">
+                  <div
+                    style={{ opacity: currentPath === "/ticket" ? 1 : 0 }}
+                    className="absolute left-0 top-0"
+                  >
+                    <Image src={TicketSelected} width={25} height={25} alt="" />
+                  </div>
+                  <div
+                    style={{ opacity: currentPath !== "/ticket" ? 1 : 0 }}
+                    className="absolute left-0 top-0"
+                  >
+                    <Image src={TicketIcon} width={25} height={25} alt="" />
+                  </div>
+                </div>
 
-          <Link href="/">
-            <div
-              className={clsx(
-                "py-3.5 flex flex-col items-center w-[53px] border-t-[5px]",
-                currentPath === "/profile"
-                  ? " border-GREEN-300"
-                  : "border-transparent"
-              )}
-            >
-              <div className="relative w-[25px] h-[25px]">
-                <div
-                  style={{ opacity: currentPath === "/profile" ? 1 : 0 }}
-                  className="absolute left-0 top-0"
+                <p
+                  className={clsx(
+                    "font-poppinsBold text-[8px] mt-3",
+                    currentPath === "/ticket" ? "text-GREEN-300" : "text-white"
+                  )}
                 >
-                  <Image src={ProfileSelected} width={25} height={25} alt="" />
-                </div>
-                <div
-                  style={{ opacity: currentPath !== "/profile" ? 1 : 0 }}
-                  className="absolute left-0 top-0"
-                >
-                  <Image src={ProfileIcon} width={25} height={25} alt="" />
-                </div>
+                  Tiketmu
+                </p>
               </div>
+            </Link>
 
-              <p
+            <Link href="/">
+              <div
                 className={clsx(
-                  "font-poppinsBold text-[8px] mt-3",
-                  currentPath === "/profile" ? "text-GREEN-300" : "text-white"
+                  "py-3.5 flex flex-col items-center w-[53px] border-t-[5px]",
+                  currentPath === "/profile"
+                    ? " border-GREEN-300"
+                    : "border-transparent"
                 )}
               >
-                Profile
-              </p>
-            </div>
-          </Link>
-        </ul>
-      </nav>
-    </>
-  );
+                <div className="relative w-[25px] h-[25px]">
+                  <div
+                    style={{ opacity: currentPath === "/profile" ? 1 : 0 }}
+                    className="absolute left-0 top-0"
+                  >
+                    <Image
+                      src={ProfileSelected}
+                      width={25}
+                      height={25}
+                      alt=""
+                    />
+                  </div>
+                  <div
+                    style={{ opacity: currentPath !== "/profile" ? 1 : 0 }}
+                    className="absolute left-0 top-0"
+                  >
+                    <Image src={ProfileIcon} width={25} height={25} alt="" />
+                  </div>
+                </div>
+
+                <p
+                  className={clsx(
+                    "font-poppinsBold text-[8px] mt-3",
+                    currentPath === "/profile" ? "text-GREEN-300" : "text-white"
+                  )}
+                >
+                  Profile
+                </p>
+              </div>
+            </Link>
+          </ul>
+        </nav>
+      </>
+    );
+  } else {
+    return (
+      <div className="z-40 fixed left-0 top-0 h-[100vh] w-full bg-white"></div>
+    );
+  }
 }

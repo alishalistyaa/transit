@@ -4,7 +4,7 @@ import (
 	"math"
 )
 
-func HaversineDistance(p1, p2 coordinate) float64 {
+func HaversineDistance(p1, p2 Coordinate) float64 {
 	const earthRadius = 6371.0
 
 	lat1 := degToRad(p1.Lat)

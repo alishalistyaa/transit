@@ -30,7 +30,7 @@ func FindPath(stops []models.Stop, connections []models.Connection, srcIndex, de
 		firstStopIdx := idIndexMap[connections[i].FirstStopId]
 		secondStopIdx := idIndexMap[connections[i].SecondStopId]
 
-		distance := HaversineDistance(coordinate{stops[firstStopIdx].Lat, stops[firstStopIdx].Lng}, coordinate{stops[secondStopIdx].Lat, stops[secondStopIdx].Lng})
+		distance := HaversineDistance(Coordinate{stops[firstStopIdx].Lat, stops[firstStopIdx].Lng}, Coordinate{stops[secondStopIdx].Lat, stops[secondStopIdx].Lng})
 
 		adjMatrix[firstStopIdx][secondStopIdx].Actual = distance
 		adjMatrix[firstStopIdx][secondStopIdx].Heuristic = distance
@@ -40,7 +40,7 @@ func FindPath(stops []models.Stop, connections []models.Connection, srcIndex, de
 		for j := 0; j < len(adjMatrix[i]); j++ {
 			if i != j && adjMatrix[i][j].Actual == 0.0 {
 				adjMatrix[i][j].Actual = 6371.0
-				adjMatrix[i][j].Heuristic = HaversineDistance(coordinate{stops[i].Lat, stops[i].Lng}, coordinate{stops[j].Lat, stops[j].Lng})
+				adjMatrix[i][j].Heuristic = HaversineDistance(Coordinate{stops[i].Lat, stops[i].Lng}, Coordinate{stops[j].Lat, stops[j].Lng})
 			}
 		}
 	}
@@ -74,12 +74,12 @@ func FindPath(stops []models.Stop, connections []models.Connection, srcIndex, de
 		return GetRouteResult{}, errors.New("failed to get path")
 	}
 
-	result := GetRouteResult{[]models.Stop{}, []coordinate{}}
+	result := GetRouteResult{[]models.Stop{}, []Coordinate{}}
 
 	for i := 0; i < len(finalPath.Nodes); i++ {
 		currStop := stops[finalPath.Nodes[i]]
 		result.Stops = append(result.Stops, currStop)
-		result.Path = append(result.Path, coordinate{currStop.Lat, currStop.Lng})
+		result.Path = append(result.Path, Coordinate{currStop.Lat, currStop.Lng})
 	}
 
 	return result, nil

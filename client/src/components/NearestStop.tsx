@@ -18,7 +18,7 @@ export default function NearestStop({
       <div className="flex flex-col items-center pt-1.5 w-10 h-10 rounded-md bg-GRAY-600">
         <Image src={LocationIcon} width={13} height={13} alt="" />
         <p className="font-poppinsLight text-white text-[10px] mt-1">
-          {distance + " KM"}
+          {distance.toFixed(1) + " KM"}
         </p>
       </div>
 
