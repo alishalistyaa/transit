@@ -45,6 +45,7 @@ export default function BuyTicketPage(): JSX.Element {
 
   const [destLat, setDestLat] = useState(0);
   const [destLng, setDestLng] = useState(0);
+  const [destName, setDestName] = useState("");
 
   const [autocomplete, setAutocomplete] =
     useState<google.maps.places.Autocomplete>();
@@ -62,10 +63,10 @@ export default function BuyTicketPage(): JSX.Element {
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
-        setCurrLat(pos.coords.latitude);
-        setCurrLng(pos.coords.longitude);
+        setCurrLat(-6.893163);
+        setCurrLng(107.610445);
 
-        fetchLocationAddress(pos.coords.latitude, pos.coords.longitude)
+        fetchLocationAddress(-6.893163, 107.610445)
           .then((res) => res.json())
           .then((data) =>
             setAddress(data.results[0].address_components[1].short_name)
@@ -115,6 +116,7 @@ export default function BuyTicketPage(): JSX.Element {
                   setDestLng(
                     autocomplete.getPlace().geometry?.location?.lng() || 0
                   );
+                  setDestName(autocomplete.getPlace().name || "");
 
                   setStops([
                     {
@@ -156,7 +158,9 @@ export default function BuyTicketPage(): JSX.Element {
 
             return (
               <div key={index} className="first:mt-0 mt-3">
-                <Link href={`choose-stop?lat=${destLat}&lng=${destLng}`}>
+                <Link
+                  href={`choose-stop?lat=${destLat}&lng=${destLng}&destName=${destName}`}
+                >
                   <NearestStop
                     distance={stop.distance}
                     title={title}

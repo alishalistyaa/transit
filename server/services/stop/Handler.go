@@ -37,7 +37,7 @@ func HandleAddStop(context *gin.Context) {
 
 	err := database.DB.Model(models.Stop{}).Create(map[string]interface{}{
 		"Name":    stop.Name,
-		"coord":   clause.Expr{SQL: "ST_MakePoint(?, ?)", Vars: []interface{}{stop.Lng, stop.Lat}},
+		"coord":   clause.Expr{SQL: "ST_SetSRID(ST_MakePoint(?, ?), 4326)", Vars: []interface{}{stop.Lng, stop.Lat}},
 		"Address": stop.Address}).Error
 
 	if err != nil {

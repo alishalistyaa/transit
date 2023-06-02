@@ -40,14 +40,24 @@ export default function ChooseStopPage(): JSX.Element {
 
   const destLat = searchParam.get("lat");
   const destLng = searchParam.get("lng");
+  const destName = searchParam.get("destName");
 
   const [currLat, setCurrLat] = useState(0);
   const [currLng, setCurrLng] = useState(0);
+  const [currName, setCurrName] = useState("");
 
   const [stopLat, setStopLat] = useState(0);
   const [stopLng, setStopLng] = useState(0);
+  const [stopId, setStopId] = useState(0);
 
   const [stops, setStops] = useState<stop[]>([]);
+
+  const MAPS_API_KEY = "AIzaSyAoFTL5YjSh3urWT3I1896Cp1F3TdCMsq8";
+  const fetchLocationAddress = async (lat: number, lng: number) => {
+    return await fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${MAPS_API_KEY}`
+    );
+  };
 
   useEffect(() => {
     const fetchNearestStop = async () => {
@@ -69,6 +79,7 @@ export default function ChooseStopPage(): JSX.Element {
         .then((data) => {
           setStopLat(data.message.Lat);
           setStopLng(data.message.Lng);
+          setStopId(data.message.StopId);
 
           setStops([
             {
@@ -88,8 +99,15 @@ export default function ChooseStopPage(): JSX.Element {
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
-        setCurrLat(pos.coords.latitude);
-        setCurrLng(pos.coords.longitude);
+        setCurrLat(-6.893163);
+        setCurrLng(107.610445);
+
+        fetchLocationAddress(-6.893163, 107.610445)
+          .then((res) => res.json())
+          .then((data) =>
+            setCurrName(data.results[0].address_components[1].short_name)
+          )
+          .catch((err) => console.error(err));
       });
     }
   }, [currLat, currLng]);
@@ -142,7 +160,7 @@ export default function ChooseStopPage(): JSX.Element {
                     <p className=" font-poppinsBold text-[8px] text-white">
                       {stops[0].title}
                     </p>
-                    <div className="absolute -bottom-0 rotate-45 w-7 bg-GREEN-500 -z-10 h-7 left-[44px]"></div>
+                    <div className="absolute -bottom-1 rotate-45 w-4 bg-GREEN-500 -z-10 h-4 left-[53px]"></div>
                   </div>
                 </OverlayView>
               ) : null}
@@ -174,7 +192,9 @@ export default function ChooseStopPage(): JSX.Element {
 
               return (
                 <div key={index} className="first:mt-0 mt-3">
-                  <Link href={`route-finding?lat=${destLat}&lng=${destLng}`}>
+                  <Link
+                    href={`route-finding?destLat=${destLat}&destLng=${destLng}&stopId=${stopId}&currLat=${currLat}&currLng=${currLng}&destName=${destName}&currName=${currName}`}
+                  >
                     <NearestStop
                       distance={stop.distance}
                       title={title}

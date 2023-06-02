@@ -76,7 +76,7 @@ export default function DashboardPage(): JSX.Element {
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) =>
-        fetchLocationAddress(pos.coords.latitude, pos.coords.longitude)
+        fetchLocationAddress(-6.893163, 107.610445)
           .then((res) => res.json())
           .then((data) => {
             setAddress(data.results[0].address_components[1].short_name);

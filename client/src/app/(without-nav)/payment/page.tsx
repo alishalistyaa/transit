@@ -12,9 +12,20 @@ import GopayLogo from "@/assets/images/gopay-logo.png";
 import DanaLogo from "@/assets/images/dana-logo.png";
 import useSession from "@/hooks/useSession";
 import Cookies from "js-cookie";
+import { useSearchParams } from "next/navigation";
 
 export default function PaymentPage(): JSX.Element {
   useSession();
+
+  const searchParam = useSearchParams();
+
+  const destLat = parseFloat(searchParam.get("destLat") || "0");
+  const destLng = parseFloat(searchParam.get("destLng") || "0");
+  const destName = searchParam.get("destName");
+  const stopId = searchParam.get("stopId");
+  const currLat = parseFloat(searchParam.get("currLat") || "0");
+  const currLng = parseFloat(searchParam.get("currLng") || "0");
+  const currName = searchParam.get("currName");
 
   const [total, setTotal] = useState("");
   const [promoCode, setPromoCode] = useState("");
@@ -27,7 +38,9 @@ export default function PaymentPage(): JSX.Element {
     return (
       <main className="pb-12">
         <div className="flex items-center w-[86vw] mx-auto pt-8">
-          <Link href="/route-finding">
+          <Link
+            href={`route-finding?destLat=${destLat}&destLng=${destLng}&stopId=${stopId}&currLat=${currLat}&currLng=${currLng}&destName=${destName}&currName=${currName}`}
+          >
             <Image src={ArrowBack} width={25} height={10} alt="" />
           </Link>
           <h3 className="text-BROWN-600 font-jeko text-xl ml-6">Pembayaran</h3>

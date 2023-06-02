@@ -1,9 +1,13 @@
 package route
 
-import "github.com/gin-gonic/gin"
+import (
+	"transit-server/services/auth"
+
+	"github.com/gin-gonic/gin"
+)
 
 func RouteRoutes(router *gin.RouterGroup) {
 	routesGroup := router.Group("/routes")
 
-	routesGroup.GET("/", HandleGetRoute)
+	routesGroup.GET("/", auth.ValidateToken(), HandleGetRoute)
 }

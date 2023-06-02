@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"transit-server/database"
 	"transit-server/services/auth"
 	"transit-server/services/connection"
@@ -37,6 +38,6 @@ func main() {
 	if err := database.ConnectDB(); err != nil {
 		fmt.Println("Database connection failed: ", err.Error())
 	} else {
-		setupRouter().Run(":5000")
+		setupRouter().Run(":" + os.Getenv("PORT"))
 	}
 }

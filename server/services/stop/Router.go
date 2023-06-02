@@ -1,6 +1,10 @@
 package stop
 
-import "github.com/gin-gonic/gin"
+import (
+	"transit-server/services/auth"
+
+	"github.com/gin-gonic/gin"
+)
 
 func RouteStop(router *gin.RouterGroup) {
 	stopGroup := router.Group("/stop")
@@ -8,5 +12,5 @@ func RouteStop(router *gin.RouterGroup) {
 	stopGroup.POST("/", HandleAddStop)
 	stopGroup.GET("/", HandleGetStop)
 	stopGroup.DELETE("/", HandleDeleteStop)
-	stopGroup.GET("/nearest", HandleGetNearestStop)
+	stopGroup.GET("/nearest", auth.ValidateToken(), HandleGetNearestStop)
 }

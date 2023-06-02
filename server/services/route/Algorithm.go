@@ -26,6 +26,11 @@ func FindPath(stops []models.Stop, connections []models.Connection, srcIndex, de
 		idIndexMap[stops[i].StopId] = i
 	}
 
+	visitedArray := make([]bool, len(stops))
+	for i := 0; i < len(stops); i++ {
+		visitedArray[i] = false
+	}
+
 	for i := 0; i < len(connections); i++ {
 		firstStopIdx := idIndexMap[connections[i].FirstStopId]
 		secondStopIdx := idIndexMap[connections[i].SecondStopId]
@@ -52,6 +57,7 @@ func FindPath(stops []models.Stop, connections []models.Connection, srcIndex, de
 	currIndex := srcIndex
 
 	for currIndex != destIndex {
+		visitedArray[currIndex] = true
 		for i := 0; i < len(adjMatrix[currIndex]); i++ {
 			if adjMatrix[currIndex][i].Actual != 0 {
 				newPath := pathEntry{}
@@ -66,6 +72,11 @@ func FindPath(stops []models.Stop, connections []models.Connection, srcIndex, de
 
 		currPath, _ = expandQueue.Dequeue()
 		currIndex = currPath.Nodes[len(currPath.Nodes)-1]
+
+		for visitedArray[currIndex] {
+			currPath, _ = expandQueue.Dequeue()
+			currIndex = currPath.Nodes[len(currPath.Nodes)-1]
+		}
 	}
 
 	finalPath, ok := expandQueue.Dequeue()
